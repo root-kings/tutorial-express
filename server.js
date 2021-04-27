@@ -6,6 +6,7 @@ const logger = require('morgan')
 // const path = require('path')
 const http = require('http')
 // const socketIO = require('socket.io')
+const mqtt = require('mqtt')
 
 require('dotenv').config()
 
@@ -50,6 +51,9 @@ app.use(
     limit: '50mb'
   })
 )
+
+var client = mqtt.connect('mqtt://test.mosquitto.org')
+global.mqtt = client
 
 // app.use(express.static(PUBLIC_DIR));
 

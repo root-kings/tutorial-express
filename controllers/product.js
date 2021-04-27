@@ -3,7 +3,7 @@ const ProductCategory = require('../models/ProductCategory').model
 
 exports.list_product_get = (req, res) => {
   Product.find()
-  .populate("category")
+    .populate('category')
     .lean()
     .then(doc => {
       return res.send(doc)
@@ -27,6 +27,7 @@ exports.create_product_post = (req, res) => {
   newProduct
     .save()
     .then(doc => {
+      global.mqtt.publish('sharvari', 'Added new Product: ' + doc._id)
       return res.send(doc)
     })
     .catch(err => {
